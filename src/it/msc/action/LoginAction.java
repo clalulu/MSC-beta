@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-
+import it.msc.model.Login;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -19,8 +19,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String username;
-	private String password;
+	
+	private Login loginData;
 
 	
 	private Map<String, Object> session;
@@ -47,7 +47,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public String loginRegisterUser() {   
 	  
 		
-	 	Connection conn = null;   
+	 	Connection conn = null; 
+	 	String username;
+	 	String password;
+	 	username = loginData.getUsername;
+	 	password = loginData.password;  
 	 	
   
        try {   
@@ -89,24 +93,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
        return LOGIN;   
     }   
 	 	
+    public Login getLoginData(){
+    	return this.loginData;
+    }
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-			
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
+    public void setLoginData(Login loginData){
+    	this.loginData = loginData;
+    }
 	
 
 	public Map<String, Object> getSession() {
