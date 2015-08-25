@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/it/msc/action/ElectricEditAction.java=UTF-8
+encoding//src/it/msc/action/EventEditAction.java=UTF-8
+encoding//src/it/msc/action/UserEditAction.java=UTF-8
+encoding//src/it/msc/dao/ElectricDao.java=UTF-8
+encoding//src/it/msc/dao/EventDao.java=UTF-8
+encoding//src/it/msc/dao/UserDao.java=UTF-8
+encoding//src/it/msc/model/EventJson.java=UTF-8
+encoding//src/it/msc/model/UserJson.java=UTF-8

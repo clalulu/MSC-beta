@@ -1,0 +1,58 @@
+
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+  
+
+<struts>
+    
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.action.excludePattern" value="/UserListAction,/UserEditAction,/EventListAction,/EventEditAction,/ElectricListAction,/ElectricEditAction"/>
+		
+    <package name="default" extends="struts-default,json-default" namespace="/">
+    <action class="it.msc.action.UserListAction" method="UserListAction" name="UserListAction">
+        
+                     	<result name="success" type="json"></result>
+            </action>
+            
+       <action class="it.msc.action.EventListAction" method="EventListAction" name="EventListAction">
+            	<result name="success" type="json"></result>
+            </action>
+            
+       <action class="it.msc.action.ElectricListAction" method="ElectricListAction" name="ElectricListAction">
+            	<result name="success" type="json"></result>
+            </action>                      
+              
+    </package>
+    <package name="login" extends="struts-default,json-default" namespace="/LoginUser">
+		<interceptors>
+			<interceptor class="it.msc.interceptor.LoginInterceptor" name="loginInterceptor">
+			</interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="login">/login/login.jsp</result>
+		</global-results>
+		
+
+		<!--   login action  -->
+		<action name="loginUser" class="it.msc.action.LoginAction" method="loginRegisterUser">
+			<result name="success" type="redirect">homeAction.action</result>
+			<result name="login">/login/login.jsp</result>
+		</action>
+
+		<!-- home link action -->
+		<action name="homeAction" class="it.msc.action.LoginAction" method="home">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/jsps/user/home.jsp</result>
+		</action>
+		<!--   logout action  -->
+		<action name="logOut" class="it.msc.action.LoginAction" method="logOut">
+			<result name="success">/login/login.jsp</result>
+		</action>
+	</package>
+</struts>
