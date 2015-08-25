@@ -41,6 +41,10 @@
 
 		<!--   login action  -->
 		<action name="loginUser" class="it.msc.action.LoginAction" method="loginRegisterUser">
+			<interceptor-ref name="defaultStack"/>
+               <interceptor-ref name="json">
+                  <param name="enableSMD">true</param>
+              </interceptor-ref>
 			<result name="success" type="redirect">homeAction.action</result>
 			<result name="login">/login/login.jsp</result>
 		</action>
