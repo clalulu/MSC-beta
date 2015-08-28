@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +22,26 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
+	private String  id;
+	private String response;
 
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+
 	private Map<String, Object> session;
 	public static final String LOGIN_SUCCESS = "success";
 	public static final String LOGIN_FAILED = "error";	
@@ -44,7 +63,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	// ---------------------------- Login register user
 	
 	
-	public String loginRegisterUser() {   
+	
+public String loginRegisterUser() {   
 	  
 		
 	 	Connection conn = null;   
@@ -65,14 +85,16 @@ public class LoginAction extends ActionSupport implements SessionAware {
         while (rs.next()) { 
         	if ( username == null)
         		{
-        		addActionError("Please Enter Valid emailId or Password");
-    			return LOGIN;
-        		 
-      		} else {
+        		
+        			response = "error user";
+					return ActionSupport.SUCCESS;
+    			        		 
+      		} else{
       			 session.put("loginId", username);
-       			return SUCCESS;
-    			
+       			response = "success";
       		}
+    			
+      		
         }
        }
         catch (Exception e) { 
@@ -86,9 +108,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
           }   
        }   
        addActionError("Please Enter Valid emailId or Password");
-       return LOGIN;   
+       return ActionSupport.SUCCESS;  
     }   
-	 	
+
+	
 
 	public String getUsername() {
 		return username;

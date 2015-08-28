@@ -21,38 +21,18 @@
             
        <action class="it.msc.action.ElectricListAction" method="ElectricListAction" name="ElectricListAction">
             	<result name="success" type="json"></result>
-            </action>                      
-              
-    </package>
-    <package name="login" extends="struts-default,json-default" namespace="/LoginUser">
-		<interceptors>
-			<interceptor class="it.msc.interceptor.LoginInterceptor" name="loginInterceptor">
-			</interceptor>
-			<interceptor-stack name="loginStack">
-				<interceptor-ref name="loginInterceptor" />
-				<interceptor-ref name="defaultStack" />
-			</interceptor-stack>
-		</interceptors>
-
-		<global-results>
-			<result name="login">/login/login.jsp</result>
-		</global-results>
-		
-
-		<!--   login action  -->
-		<action name="loginUser" class="it.msc.action.LoginAction" method="loginRegisterUser">
-			<result name="success" type="redirect">homeAction.action</result>
-			<result name="login">/login/login.jsp</result>
-		</action>
-
-		<!-- home link action -->
-		<action name="homeAction" class="it.msc.action.LoginAction" method="home">
-			<interceptor-ref name="loginStack" />
-			<result name="success">/WEB-INF/jsps/user/home.jsp</result>
-		</action>
-		<!--   logout action  -->
-		<action name="logOut" class="it.msc.action.LoginAction" method="logOut">
+            </action>   
+            
+            <action class="it.msc.action.LoginAction" method="loginRegisterUser" name="loginRegisterUser">
+            	<result  type="json"></result>
+            </action>   
+            
+            <action name="logOut" class="it.msc.action.LoginAction" method="logOut">
 			<result name="success">/login/login.jsp</result>
 		</action>
-	</package>
+                
+                         
+              
+    </package>
+    
 </struts>
