@@ -9,7 +9,6 @@
 		<title>Login</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<!-- Optional theme -->
 		<style rel="stylesheet" media="all">
 			body { background-color: #dddddd; }
 
@@ -21,13 +20,18 @@
 				margin: 20px auto;
 				background-color: #fff;
 			}
+			
+			.formX form {
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body>
 
 		<div class="container">
-			<div class="row">
-				<form action="#" method="post" class="formX">
+			<h1 class="text-center">Login Form</h1>
+			<div class="row formX">
+				<form method="post">
 					<div class="form-group">
 						<label for="username">Username</label>
 						<input type="text" id="username" name="username" class="form-control" placeholder="Inserisci user">
@@ -39,10 +43,9 @@
 
 					<input type="button" id="submit_btn" class="btn btn-primary" name="submit" value="submit">
 				</form>
+				<div id="log" class="text-center"></div>
 			</div>
-
-
-			<div id="log" class="text-center"></div>
+			<div class="small text-center">Sir Xiradorn Form</div>
 		</div>
 
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -53,22 +56,23 @@
 			});
 
 			function loginFunct() {
-				$('#submit_btn').click(function(e){
+				$('#submit_btn').on("click", function(e){
 					e.preventDefault();
-
+					
 					var username = $('#username').val();
 					var password = $('#password').val();
 
 					$.ajax({
-						url: "loginRegisterUser",
+						url: "loginRegisterUser.action",
 						type: "post",
 						data: "username=" + username + "&password=" + password,
-						success: function(ritorno){
-				        	if(ritorno.Out == "success") {
-				        		redirect = "index.jsp";
-				        	} else {
-				        		$('#log').html("Log Checker:<br>Errore !!!");
-				        	}
+						dataType: "json",
+						success: function(result){
+							if(result.response == "success" && result.response != null) {
+								$('#log').html("<div class='alert alert-success'><span class='glyphicon glyphicon-ok-sign' aria-hidden='true'></span> Ok Il log è avvenuto con successo</div>");
+							} else {
+								$('#log').html("<div class='alert alert-danger'><span class='glyphicon glyphicon-remove-sign' aria-hidden='true'></span> Attenzione !!! Campi non corretti</div>");
+							}
 				    	},
 					});
 				});
